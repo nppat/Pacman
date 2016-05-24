@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Pacman Demo</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id="container">
+		<div id='world'></div>
+		<div id="pacman"></div>
+		<div id="score"></div>
+		<div id="cherry"></div>
+	</div>
+	<script>
+		var world = [
+			[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2], //Sets up the Pacman world. 1= coin, 2=brick, 0= empty
+			[2,1,1,2,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2,1,2],
+			[2,1,1,2,1,2,2,2,1,1,1,1,1,1,1,2,2,2,2,2,2,1,1,1,1,1,1,1,2],
+			[2,1,1,2,1,2,1,2,1,1,1,2,1,1,1,2,3,1,1,1,2,1,1,3,1,1,2,1,2],
+			[2,1,1,2,1,2,1,2,1,1,1,1,1,1,1,2,2,1,1,2,2,1,1,1,1,1,1,1,2],
+			[2,1,1,2,2,2,1,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2],
+			[2,1,1,1,1,1,1,2,1,1,3,1,1,2,1,1,1,1,1,1,1,2,2,2,2,2,1,1,2],
+			[2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,1,1,2],
+			[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+		];
+
+		var score = 0; //Set the score to 0
+
+		var pacman = { //Place Pacman on game board
+			x: 1,
+			y: 1,
+		};
+
+		function displayWorld(){ //Set up the gameboard
+			var output =  '';
+
+			for(var i=0; i<world.length; i++){
+				output += "\n<div class='row'>\n";
+				for(var j=0; j<world[i].length; j++){
+					if(world[i][j] == 2)
+						output += "<div class='brick'></div>";//Set bricks
+					else if(world[i][j] == 1)
+						output +=  "<div class='coin'></div>";//Set coins
+					else if(world[i][j] == 3)
+						output +=  "<div class='cherry'></div>";//Set cherries
+					if(world[i][j] == 0)
+						output +=  "<div class='emtpy'></div>";//Set empty space
+				}
+				output += "\n</div>";
+			}
+			console.log(output);
+			document.getElementById('world').innerHTML = output;
+		};
+
+		function displayPacman(){
+			document.getElementById('pacman').style.top = pacman.y*20+"px";
+			document.getElementById('pacman').style.left = pacman.x*20+"px";
+		};
+
+		function displayScore(){
+			document.getElementById('score').innerHTML = score;
+		};
+
+		displayWorld();
+		displayPacman();
+		displayScore();
+
+		document.onkeydown =function(e){
+			//keyCode for left arrow
+			//&& world[pacman.y][pacman.x-1] != 2 is collision detection to prevent pacman from moving outside of the walls
+			if(e.keyCode  == 37 && world[pacman.y][pacman.x-1] != 2){
+				pacman.x--;
+			}
+			//keyCode for right arrow
+			else if(e.keyCode  == 39 && world[pacman.y][pacman.x+1] != 2){
+				pacman.x++;
+			}
+			//keyCode for up arrow
+			else if(e.keyCode  == 38 && world[pacman.y-1][pacman.x] != 2){
+				pacman.y--;
+			}
+			//keyCode for down arrow
+			else if(e.keyCode  == 40 && world[pacman.y+1][pacman.x] != 2){
+				pacman.y++;
+			}
+			//Eats cherries, adds +10 to score
+			if(world[pacman.y][pacman.x] == 3){
+				world[pacman.y][pacman.x] = 0;
+				score +=  50;
+				displayWorld();
+				displayScore();
+			}
+			//Eats coins, adds +50 to score
+			if(world[pacman.y][pacman.x] == 1){
+				world[pacman.y][pacman.x] = 0;
+				score +=  10;
+				displayWorld();
+				displayScore();
+			}
+
+			console.log(e.keyCode);
+			displayPacman();
+		};
+	</script>
+</body>
+</html>
