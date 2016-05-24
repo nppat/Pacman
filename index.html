@@ -49,13 +49,14 @@
 				}
 				output += "\n</div>";
 			}
-			console.log(output);
+			// console.log(output);
 			document.getElementById('world').innerHTML = output;
 		};
 
 		function displayPacman(){
 			document.getElementById('pacman').style.top = pacman.y*20+"px";
 			document.getElementById('pacman').style.left = pacman.x*20+"px";
+			
 		};
 
 		function displayScore(){
@@ -71,18 +72,22 @@
 			//&& world[pacman.y][pacman.x-1] != 2 is collision detection to prevent pacman from moving outside of the walls
 			if(e.keyCode  == 37 && world[pacman.y][pacman.x-1] != 2){
 				pacman.x--;
+				document.getElementById('pacman').setAttribute("style","-webkit-transform: rotate(180deg)");
 			}
 			//keyCode for right arrow
 			else if(e.keyCode  == 39 && world[pacman.y][pacman.x+1] != 2){
 				pacman.x++;
+				document.getElementById('pacman').setAttribute("style","-webkit-transform: rotate(0deg)");
 			}
 			//keyCode for up arrow
 			else if(e.keyCode  == 38 && world[pacman.y-1][pacman.x] != 2){
 				pacman.y--;
+				document.getElementById('pacman').setAttribute("style","-webkit-transform: rotate(270deg)");
 			}
 			//keyCode for down arrow
 			else if(e.keyCode  == 40 && world[pacman.y+1][pacman.x] != 2){
 				pacman.y++;
+				document.getElementById('pacman').setAttribute("style","-webkit-transform: rotate(90deg)");
 			}
 			//Eats cherries, adds +10 to score
 			if(world[pacman.y][pacman.x] == 3){

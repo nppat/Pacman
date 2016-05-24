@@ -41,6 +41,7 @@ div#pacman {
 	width: 20px;
 	height: 20px;
 	position: absolute;
+	rotation: 0deg;
 }
 div.cherry {
 	background-image: url('cherry.png');
