@@ -61,12 +61,3 @@ div#score {
 	left: 610px;
 	
 }
-
-.east {
-	transform: rotate(0deg);
-	-webkit-tranform:rotate(0deg);
-}
-.west {
-	transform:rotate(270deg);
-	-webkit-transform:rotate(270deg);
-}
