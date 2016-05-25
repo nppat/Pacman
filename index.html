@@ -73,21 +73,25 @@
 			if(e.keyCode  == 37 && world[pacman.y][pacman.x-1] != 2){
 				pacman.x--;
 				document.getElementById('pacman').setAttribute("style","-webkit-transform: rotate(180deg)");
+				// ^ Rotates Pacman in direction of travel
 			}
 			//keyCode for right arrow
 			else if(e.keyCode  == 39 && world[pacman.y][pacman.x+1] != 2){
 				pacman.x++;
 				document.getElementById('pacman').setAttribute("style","-webkit-transform: rotate(0deg)");
+				// ^ Rotates Pacman in direction of travel
 			}
 			//keyCode for up arrow
 			else if(e.keyCode  == 38 && world[pacman.y-1][pacman.x] != 2){
 				pacman.y--;
 				document.getElementById('pacman').setAttribute("style","-webkit-transform: rotate(270deg)");
+				// ^ Rotates Pacman in direction of travel
 			}
 			//keyCode for down arrow
 			else if(e.keyCode  == 40 && world[pacman.y+1][pacman.x] != 2){
 				pacman.y++;
 				document.getElementById('pacman').setAttribute("style","-webkit-transform: rotate(90deg)");
+				// ^ Rotates Pacman in direction of travel
 			}
 			//Eats cherries, adds +10 to score
 			if(world[pacman.y][pacman.x] == 3){
